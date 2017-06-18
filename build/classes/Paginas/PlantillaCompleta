@@ -1,0 +1,38 @@
+<page>
+ <head>
+	
+		title="hola"; 
+		include("/enlace")
+	</head>
+	<body> ()
+
+		<div> ()
+			h1 () {
+				
+				"holamundo"
+			}	
+		<div> ()
+			h1 () {
+				
+				"holamundo"
+			}		
+		</div>	
+		</div>
+		<div> ()
+			h1 () {
+				
+				"holamundo"
+			}	 	
+		</div> 
+	</body>  
+	
+</page>
+class carlos {
+number(9) car
+varchar2(6) cas
+}
+user{
+userid=carlos
+password=insegura
+}
+

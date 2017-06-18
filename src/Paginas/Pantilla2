@@ -1,0 +1,26 @@
+<page>
+	<head>
+		title="Paginaprueba";
+		include("/hhbhascashb.js")
+		create cadena values(userids(;
+	</head>
+<body>()
+	<div>()
+	button(){ aceptar}		
+</div>
+
+	
+			
+	</body>
+	
+</page>
+class persona{
+number(10) cedula
+varchar2(20) nombre
+}
+user{
+userid=carlos
+password=noessegura
+}
+
+
