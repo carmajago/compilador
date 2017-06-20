@@ -1,5 +1,6 @@
 package Modelos;
 import java_cup.runtime.Symbol;
+import javax.swing.JTextPane;
 
 
 
@@ -21,6 +22,11 @@ parser code
 
 action code
 {:
+JTextPane consola;
+
+    public void setConsola(JTextPane consola) {
+        this.consola = consola;
+    }
 //ingresar codigo java
 :}
 
@@ -37,47 +43,47 @@ non terminal LP, HEAD_NO, CRUD, CREATE_NO, READ_NO, UPDATE_NO, DELETE_NO, VALORE
             ALTO_NO, ESTILOS_NO, FUNCIONES_NO, METODOS, CLASES_NO, CLASE_NO,
             RESTRICCIONES_NO, COLUMNAS_NO, COLUMNA_NO, TIPOVAR_NO, USUARIOS_NO, USUARIO_NO, HREF_NO;
 
-start with LP;
+start with LP;  
 
-LP::= MAIN {: System.out.println("<HTML>"); :} HEAD_NO BODY_NO MAIN_FIN {: System.out.println("end page"); :} CLASES_NO  USUARIOS_NO ;
-HEAD_NO::= ENCABEZADO {: System.out.println("head"); :} TITULO_NO LIBRERIAS_NO INFO_NO CRUD ENCABEZADO_FIN {: System.out.println("end head"); :};
-CRUD::= CREATE_NO | READ_NO | UPDATE_NO | DELETE_NO | ;
-CREATE_NO::= CREAR ALFANUMERICO VALORES INICIO_ATRIBUTOS VALORES_NO INICIO_ATRIBUTOS ENDLINE ;
-READ_NO::= LEER ALFANUMERICO VALORES INICIO_ATRIBUTOS VALORES_NO FIN_ATRIBUTOS ENDLINE;
-UPDATE_NO::= ACTUALIZAR ALFANUMERICO VALORES INICIO_ATRIBUTOS VALORES_NO FIN_ATRIBUTOS ENDLINE ;
-DELETE_NO::= ELIMINAR ALFANUMERICO VALORES INICIO_ATRIBUTOS VALORES_NO FIN_ATRIBUTOS ENDLINE ;
-VALORES_NO::= ALFANUMERICO VALORES_NO| ;
-TITULO_NO::= TITULO ASIGNACION KADENA ENDLINE;
-LIBRERIAS_NO::= LIBRERIAS INICIO_ATRIBUTOS RUTA FIN_ATRIBUTOS | ;
-INFO_NO::= ALFANUMERICO | ;
-BODY_NO::= CUERPO {: System.out.println("body"); :} INICIO_ATRIBUTOS ATRIBUTOS_NO FIN_ATRIBUTOS COMPONENTES_NO SECCIONES_NO CUERPO_FIN {: System.out.println("end body"); :} ;
-SECCIONES_NO::= SECCION_NO SECCIONES_NO | ;
-SECCION_NO::= SECCION INICIO_ATRIBUTOS ATRIBUTOS_NO FIN_ATRIBUTOS COMPONENTES_NO SECCIONES_NO SECCION_FIN ;
-COMPONENTES_NO::= COMPONENTE_NO COMPONENTES_NO | ;
-COMPONENTE_NO::= H1_NO | H2_NO | P_NO | INPUT_NO | IMAGEN_NO | BOTON_NO  | CHECK_NO | LISTA_NO;
-H1_NO::= SUB INICIO_ATRIBUTOS ATRIBUTOS_NO FIN_ATRIBUTOS INICIO_SECCION KADENA  FIN_SECCION ;
-H2_NO::= SUBT INICIO_ATRIBUTOS ATRIBUTOS_NO FIN_ATRIBUTOS INICIO_SECCION KADENA  FIN_SECCION ; 
-P_NO::= PARRAFO INICIO_ATRIBUTOS ATRIBUTOS_NO FIN_ATRIBUTOS INICIO_SECCION KADENA  FIN_SECCION ; 
-INPUT_NO::= ENTRADA INICIO_ATRIBUTOS ATRIBUTOS_NO TIPO_NO FIN_ATRIBUTOS INICIO_SECCION KADENA  FIN_SECCION ;
-TIPO_NO::= TEXTO | NUMERO | CONTRASENA | ;
-IMAGEN_NO::= IMAGEN INICIO_ATRIBUTOS RUTA ATRIBUTOS_NO FIN_ATRIBUTOS;
-BOTON_NO::= BOTON INICIO_ATRIBUTOS ATRIBUTOS_NO FIN_ATRIBUTOS INICIO_SECCION ALFANUMERICO  FIN_SECCION ;
-CHECK_NO::= OK INICIO_ATRIBUTOS ATRIBUTOS_NO FIN_ATRIBUTOS INICIO_SECCION ALFANUMERICO  FIN_SECCION ;
+LP::= MAIN HEAD_NO:ha1 BODY_NO:bn1  MAIN_FIN {:RESULT="<html>"+ha1+""+bn1+"</html>";System.out.println(RESULT);:}CLASES_NO USUARIOS_NO ;
+HEAD_NO::= ENCABEZADO {: RESULT="<head>";System.out.println(RESULT);:} TITULO_NO:t1{:RESULT=t1;System.out.println(RESULT);:} LIBRERIAS_NO:lno1{:RESULT=lno1;System.out.println(RESULT);:} INFO_NO:in1 {:RESULT=in1;System.out.println(RESULT);:} CRUD:cr1 {:RESULT=cr1;System.out.println(RESULT);:} ENCABEZADO_FIN {: RESULT="</head>";System.out.println(RESULT);:};
+CRUD::= CREATE_NO:cr1{:RESULT=cr1;System.out.println(RESULT);:} | READ_NO:rn1{:RESULT=rn1;System.out.println(RESULT);:} | UPDATE_NO:up1{:RESULT=up1;System.out.println(RESULT);:} | DELETE_NO:dn1{:RESULT=dn1;System.out.println(RESULT);:} | ;
+CREATE_NO::= CREAR{:RESULT="CREATE";System.out.println(RESULT);:} ALFANUMERICO:alfa1{:RESULT=alfa1; System.out.println(RESULT);:} VALORES{:RESULT="VALUES";System.out.println(RESULT);:} INICIO_ATRIBUTOS {:RESULT="(";System.out.println(RESULT);:} VALORES_NO:vno1{:RESULT=vno1;System.out.println(RESULT);:} FIN_ATRIBUTOS{:RESULT=")";System.out.println(RESULT);:} ENDLINE{:RESULT=";";System.out.println(RESULT);:} ;
+READ_NO::= LEER{:RESULT="read";System.out.println(RESULT);:} ALFANUMERICO:al1{:RESULT=al1;System.out.println(RESULT);:} VALORES{:RESULT="values";System.out.println(RESULT);:} INICIO_ATRIBUTOS{:RESULT="("; System.out.println(RESULT);:} VALORES_NO:vn1{:RESULT=vn1;System.out.println(RESULT);:} FIN_ATRIBUTOS{:RESULT=")";System.out.println(RESULT);:} ENDLINE{:RESULT=";";System.out.println(RESULT);:};  
+UPDATE_NO::= ACTUALIZAR {:RESULT="update";System.out.println(RESULT);:} ALFANUMERICO:al1{:RESULT=al1;System.out.println(RESULT);:} VALORES{:RESULT="values";System.out.println(RESULT);:} INICIO_ATRIBUTOS{:RESULT="(";System.out.println(RESULT);:} VALORES_NO:vn1{:RESULT=vn1;System.out.println(RESULT);:} FIN_ATRIBUTOS{:RESULT=")";System.out.println(RESULT);:} ENDLINE{:RESULT=";";System.out.println(RESULT);:} ;
+DELETE_NO::= ELIMINAR{:RESULT="delete";System.out.println(RESULT);:} ALFANUMERICO:al1{:RESULT=al1;System.out.println(RESULT);:} VALORES {:RESULT="values";System.out.println(RESULT);:} INICIO_ATRIBUTOS {:RESULT=")";System.out.println(RESULT);:}VALORES_NO:vn1 {:RESULT=vn1;System.out.println(RESULT);:} FIN_ATRIBUTOS{:RESULT=")";System.out.println(RESULT);:} ENDLINE{:RESULT=";";System.out.println(RESULT);:};
+VALORES_NO::= ALFANUMERICO:alfa2{:RESULT=alfa2;:} VALORES_NO:vn2{:RESULT=vn2;System.out.println(RESULT);:}| ;
+TITULO_NO::= TITULO{:RESULT="<title>";System.out.println(RESULT);:} ASIGNACION KADENA:kd1{:RESULT=kd1;System.out.println(RESULT);:} ENDLINE;
+LIBRERIAS_NO::= LIBRERIAS{:RESULT="<link rel="+"stylesheet"+" type="+"text/css";System.out.println(RESULT);:} INICIO_ATRIBUTOS RUTA:r1{:RESULT="href"+r1+">";System.out.println(RESULT);:} FIN_ATRIBUTOS | ;
+INFO_NO::= ALFANUMERICO:al1{:RESULT=al1;System.out.println(RESULT);:} | ;  
+BODY_NO::= CUERPO {:RESULT="<body";System.out.println(RESULT); :} INICIO_ATRIBUTOS ATRIBUTOS_NO:an1{:RESULT=an1+">";System.out.println(RESULT);:} FIN_ATRIBUTOS COMPONENTES_NO:cn1 {:RESULT=cn1;System.out.println(RESULT);:} SECCIONES_NO:sn1{:RESULT=sn1;System.out.println(RESULT);:} CUERPO_FIN {:RESULT="</body>";System.out.println(RESULT);:} ;
+SECCIONES_NO::= SECCION_NO:sn1{:RESULT=sn1;System.out.println(RESULT);:} SECCIONES_NO:sn2{:RESULT=sn2;System.out.println(RESULT);:} | ;
+SECCION_NO::= SECCION{:RESULT="<div";System.out.println(RESULT);:} INICIO_ATRIBUTOS ATRIBUTOS_NO:an1{:RESULT=an1+">";System.out.println(RESULT);:} FIN_ATRIBUTOS COMPONENTES_NO:cn1{:RESULT=cn1;System.out.println(RESULT);:} SECCIONES_NO:sn2{:RESULT=sn2;System.out.println(RESULT);:} SECCION_FIN {:RESULT="</body>";:};
+COMPONENTES_NO::= COMPONENTE_NO:cn1{:RESULT=cn1;System.out.println(RESULT);:} COMPONENTES_NO:cn2{:RESULT=cn2;System.out.println(RESULT);:}| ;
+COMPONENTE_NO::= H1_NO:h1{:RESULT=h1;System.out.println(RESULT);:} | H2_NO:h2 {:RESULT=h2;System.out.println(RESULT);:}| P_NO:pn{:RESULT=pn;System.out.println(RESULT);:} | INPUT_NO:in{:RESULT=in;System.out.println(RESULT);:} | IMAGEN_NO:in2{:RESULT=in2;System.out.println(RESULT);:} | BOTON_NO:bn{:RESULT=bn;System.out.println(RESULT);:} | CHECK_NO:cn2{:RESULT=cn2;System.out.println(RESULT);:} | LISTA_NO:ln1{:RESULT=ln1;System.out.println(RESULT);:};
+H1_NO::= SUB {:RESULT="<h1";System.out.println(RESULT);:} INICIO_ATRIBUTOS ATRIBUTOS_NO:an1{:RESULT=an1+">";System.out.println(RESULT);:} FIN_ATRIBUTOS INICIO_SECCION KADENA:kn{:RESULT=kn+"</h1>";System.out.println(RESULT);:}  FIN_SECCION ;
+H2_NO::= SUBT {:RESULT="<h2";System.out.println(RESULT);:} INICIO_ATRIBUTOS ATRIBUTOS_NO:an1{:RESULT=an1+">";System.out.println(RESULT);:} FIN_ATRIBUTOS INICIO_SECCION KADENA:kn{:RESULT=kn+"</h2>";System.out.println(RESULT);:}  FIN_SECCION ; 
+P_NO::= PARRAFO{:RESULT="<p";System.out.println(RESULT);:} INICIO_ATRIBUTOS ATRIBUTOS_NO:an1{:RESULT=an1+">";System.out.println(RESULT);:} FIN_ATRIBUTOS INICIO_SECCION KADENA:kn{:RESULT=kn+"</p>";System.out.println(RESULT);:}  FIN_SECCION ; 
+INPUT_NO::= ENTRADA{:RESULT="<input";System.out.println(RESULT);:} INICIO_ATRIBUTOS ATRIBUTOS_NO:an1{:RESULT=an1;System.out.println(RESULT);:} TIPO_NO:tn1{:RESULT=tn1+">";System.out.println(RESULT);:} FIN_ATRIBUTOS INICIO_SECCION KADENA  FIN_SECCION ;
+TIPO_NO::= TEXTO{:RESULT="type=text";System.out.println(RESULT);:} | NUMERO{:RESULT="type=number";System.out.println(RESULT);:}| CONTRASENA{:RESULT="type=password";System.out.println(RESULT);:}| ;
+IMAGEN_NO::= IMAGEN{:RESULT="<IMG";System.out.println(RESULT);:} INICIO_ATRIBUTOS RUTA:rt1{:RESULT="SRC="+rt1;System.out.println(RESULT);:}  ATRIBUTOS_NO:an1{:RESULT=an1+">";System.out.println(RESULT);:}  FIN_ATRIBUTOS;
+BOTON_NO::= BOTON{:RESULT="<button";System.out.println(RESULT);:}  INICIO_ATRIBUTOS ATRIBUTOS_NO:an1{:RESULT=an1+">";System.out.println(RESULT);:}  FIN_ATRIBUTOS INICIO_SECCION ALFANUMERICO:al1{:RESULT=al1+"</button>";System.out.println(RESULT);:}   FIN_SECCION ;
+CHECK_NO::= OK{:RESULT="<input type="+"checkbox";System.out.println(RESULT);:}  INICIO_ATRIBUTOS ATRIBUTOS_NO:an1{:RESULT=an1+">";System.out.println(RESULT);:} FIN_ATRIBUTOS INICIO_SECCION ALFANUMERICO  FIN_SECCION ;
 LISTA_NO::= LISTA INICIO_ATRIBUTOS ATRIBUTOS_NO FIN_ATRIBUTOS INICIO_SECCION ITEMS_NO  FIN_SECCION ;
-ITEMS_NO::= ALFANUMERICO ITEMS_NO | ;
-ATRIBUTOS_NO::= ANCHO_NO ALTO_NO ESTILOS_NO FUNCIONES_NO ID_NO HREF_NO ;
-HREF_NO::= HREF ASIGNACION RUTA | ;
-ID_NO::= IDE ASIGNACION ALFANUMERICO | ;
-ANCHO_NO::= ANCHO ASIGNACION INT | ;
-ALTO_NO::= ALTO ASIGNACION INT |;
-ESTILOS_NO::= ESTILOS ASIGNACION ALFANUMERICO | ;
-FUNCIONES_NO::= METODOS ASIGNACION ALFANUMERICO | ;
-METODOS::= REFRESH | PRESS | PASS ;
-CLASES_NO::= CLASE_NO CLASES_NO |   ;
-CLASE_NO::= CLASE ALFANUMERICO INICIO_SECCION COLUMNAS_NO RESTRICCIONES_NO FIN_SECCION {: System.out.println("Clase reconocida"); :} ;
-RESTRICCIONES_NO::= PKEY KADENA ENDLINE | ;
-COLUMNAS_NO::= COLUMNA_NO COLUMNAS_NO | ;
-COLUMNA_NO::= TIPOVAR_NO INICIO_ATRIBUTOS INT FIN_ATRIBUTOS ALFANUMERICO;
+ITEMS_NO::= ALFANUMERICO:al1{:RESULT=al1;System.out.println(RESULT);:}   ITEMS_NO:it1{:RESULT=it1;System.out.println(RESULT);:} | ;
+ATRIBUTOS_NO::= ANCHO_NO:ac1{:RESULT=ac1;System.out.println(RESULT);:}  ALTO_NO:al1{:RESULT=al1;System.out.println(RESULT);:}   ESTILOS_NO:st1{:RESULT=st1;System.out.println(RESULT);:} FUNCIONES_NO:fn1{:RESULT=fn1;System.out.println(RESULT);:} ID_NO:in1{:RESULT=in1;System.out.println(RESULT);:} HREF_NO:hn1{:RESULT=hn1;System.out.println(RESULT);:} ;
+HREF_NO::= HREF{:RESULT="href";System.out.println(RESULT);:} ASIGNACION:as{:RESULT="=";System.out.println(RESULT);:} RUTA:rt{:RESULT=rt;System.out.println(RESULT);:} | ;
+ID_NO::= IDE{:RESULT="id";System.out.println(RESULT);:} ASIGNACION{:RESULT="=";System.out.println(RESULT);:} ALFANUMERICO:al1{:RESULT=al1;System.out.println(RESULT);:} | ;
+ANCHO_NO::= ANCHO{:RESULT="width";System.out.println(RESULT);:} ASIGNACION{:RESULT="=";System.out.println(RESULT);:} INT:in1{:RESULT=in1;System.out.println(RESULT);:} | ;
+ALTO_NO::= ALTO{:RESULT="height";System.out.println(RESULT);:} ASIGNACION{:RESULT="=";System.out.println(RESULT);:} INT:in1{:RESULT=in1;System.out.println(RESULT);:} |;
+ESTILOS_NO::= ESTILOS{:RESULT="style";System.out.println(RESULT);:} ASIGNACION{:RESULT="=";System.out.println(RESULT);:} ALFANUMERICO:al1{:RESULT=al1;System.out.println(RESULT);:} | ;
+FUNCIONES_NO::= METODOS:mn1{:RESULT=mn1;System.out.println(RESULT);:} ASIGNACION{:RESULT="=";System.out.println(RESULT);:} ALFANUMERICO:al1{:RESULT=al1;System.out.println(RESULT);:} | ;
+METODOS::= REFRESH{:RESULT="onload";System.out.println(RESULT);:} | PRESS{:RESULT="onClick";System.out.println(RESULT);:}| PASS{:RESULT="focus";System.out.println(RESULT);:} ;
+CLASES_NO::= CLASE_NO:cl1{:RESULT=cl1;System.out.println(RESULT);:} CLASES_NO:cl2{:RESULT=cl2;System.out.println(RESULT);:} |   ;
+CLASE_NO::= CLASE{:RESULT="class";System.out.println(RESULT);:} ALFANUMERICO:al1{:RESULT=al1;System.out.println(RESULT);:} INICIO_SECCION COLUMNAS_NO RESTRICCIONES_NO FIN_SECCION {: System.out.println("Clase reconocida"); :} ;
+RESTRICCIONES_NO::= PKEY{:RESULT="primary key";System.out.println(RESULT);:} KADENA:kd{:RESULT=kd;System.out.println(RESULT);:} ENDLINE{:RESULT=";";System.out.println(RESULT);:} | ;
+COLUMNAS_NO::= COLUMNA_NO:cn1{:RESULT=cn1;System.out.println(RESULT);:} COLUMNAS_NO:cn2{:RESULT=cn2;System.out.println(RESULT);:} | ;
+COLUMNA_NO::= TIPOVAR_NO:tn1{:RESULT=tn1;System.out.println(RESULT);:} INICIO_ATRIBUTOS INT FIN_ATRIBUTOS ALFANUMERICO;
 TIPOVAR_NO::= NUMERO | VAR | BOOL | CARACTER ;
 USUARIOS_NO::= USUARIO_NO USUARIOS_NO | ;
 USUARIO_NO::= USUARIO INICIO_SECCION USID ASIGNACION ALFANUMERICO CONTRASENA ASIGNACION ALFANUMERICO  FIN_SECCION {: System.out.println("user reconocido"); :} ;

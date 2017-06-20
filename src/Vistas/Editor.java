@@ -816,7 +816,7 @@ public class Editor extends javax.swing.JPanel {
         Reader reader = new BufferedReader(new FileReader("fichero.txt"));
 
         Sintactico s = new Sintactico(new Modelos.Scanner(reader));
-        s.setConsola(consola);
+        //s.setConsola(consola);
         s.parse();
     }
     public void setblack(){

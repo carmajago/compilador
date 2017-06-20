@@ -36,7 +36,7 @@
 		button(){crear}
 		button(){modificar}
 		button(){borrar}
-		button(){eliminar} 
+		button(){eliminar}
 		</div>
 
 	</body> 
